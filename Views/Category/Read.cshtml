@@ -1,0 +1,31 @@
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Category List";
+    Layout = "_Layout";
+}
+<a class="btn btn-success" href="@Url.Action("Create", "Category")">Create</a>
+<a class="btn btn-warning" href="@Url.Action(action: "Index", "Product")">Product</a>
+
+<table class="table table-info">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Name</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Update", "Category", new { id = category.Id })">Update</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Category", new { id = category.Id })">Delete</a>
+                </td>                     
+            </tr>
+        }
+    </tbody>
+</table>

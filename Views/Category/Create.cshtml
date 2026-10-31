@@ -1,0 +1,13 @@
+@model Category
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Category Create";
+    Layout = "_Layout";
+}
+
+<form class="form-control" asp-action="Create" asp-controller="Category" method="post">
+    <label asp-for="Name">Name</label>
+    <input class="form-control" asp-for="Name" type="text" placeholder="name" />
+    <button class="btn btn-success" type="submit">Create</button>
+</form>

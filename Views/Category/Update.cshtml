@@ -1,0 +1,15 @@
+@model Category
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Category Update";
+    Layout = "_Layout";
+}
+
+<a class="btn btn-info" href="@Url.Action("Read", "Category")">Category List</a>
+
+<form class="form-control" asp-action="Update" asp-controller="Category" method="post">
+    <label asp-for="Name">Name</label>
+    <input class="form-control" asp-for="Name" type="text" value="@Model.Name" />
+    <button class="btn btn-success" type="submit">Update</button>
+</form>

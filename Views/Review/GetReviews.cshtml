@@ -1,0 +1,40 @@
+@model IEnumerable<Review>
+
+@{
+    ViewData["Title"] = "Review List";
+    Layout = "_Layout";
+}
+
+<a class="btn btn-success" href="@Url.Action("CreateReview", "Review")">Create</a>
+<table class="table table-info">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Comments</th>
+            <th>Rating</th>
+            <th>ProductId</th>
+            <th>UserId</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var  review in Model){
+            <tr>
+                <td>@review.Id</td>
+                <td>@review.Comment</td>
+                <td>@review.Rating</td>
+                <td>@review.ProductId</td>
+                <td>@review.UserId</td>
+                <td>
+                <a class="btn btn-primary" href="@Url.Action("UpdateReview", "Review", new { id = review.Id })">Update</a>
+               <a class="btn btn-danger"
+   href="@Url.Action("DeleteReviewConfirm", "Review", new { id = review.Id })">
+    Delete
+</a>
+
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

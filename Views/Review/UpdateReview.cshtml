@@ -1,0 +1,29 @@
+@model Review
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Update Review";
+    Layout = "_Layout";
+}
+
+<form asp-action="UpdateReview" asp-controller="Review" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <label asp-for="Comment"></label>
+    <input class="form-control" asp-for="Comment" />
+
+    <label asp-for="Rating"></label>
+    <input class="form-control" asp-for="Rating" />
+
+    <label asp-for="ProductId"></label>
+    <input class="form-control" asp-for="ProductId" />
+
+    <label asp-for="UserId"></label>
+    <input class="form-control" asp-for="UserId" />
+
+    <button class="btn btn-primary" type="submit">
+        Update
+    </button>
+
+</form>

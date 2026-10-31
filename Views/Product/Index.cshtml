@@ -1,0 +1,76 @@
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Product List";
+    Layout = "_Layout";
+}
+<a class="btn btn-success" href="@Url.Action(action: "Create", "Product")">Create</a>
+<a class="btn btn-info" href="@Url.Action("Read", "Category")">Category List</a>
+<a class="btn btn-info" href="@Url.Action("GetReviews", "Review")">Review List</a>
+@if(!User.Identity.IsAuthenticated){
+<a class="btn btn-danger" href="@Url.Action(action: "Register", "User")">Register</a>
+<a class="btn btn-primary" href="@Url.Action(action: "Login", "User")">Login</a>
+
+
+}else{
+    <a class="btn btn-dark" href="@Url.Action("Logout", "User")">Logout</a>
+     <a class="btn btn-info" href="@Url.Action("Create", "Role")">CreateRole</a>
+    <a class="btn btn-success" href="@Url.Action("Assign", "Role")">AssignRole</a>
+    <a class="btn btn-warning" href="@Url.Action(action: "Index", "Image")">All Images</a>
+    <a class="btn btn-primary" href="@Url.Action(action: "Insert", "Image")">Add Image</a>
+
+    <h2>@User.Identity.Name</h2>
+
+}
+<table class="table table-info">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Category</th>
+             <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Quantity</td>
+                <td>@product.CategotyId</td>
+                <td>
+
+   @if (product.ProductImages != null &&
+         product.ProductImages.Any())
+    {
+        foreach (var image in product.ProductImages)
+        {
+            <img src="@image.ImageUrl"
+                 alt="@product.Name"
+                 width="100"
+                 height="100"
+                 style="object-fit: contain;" />
+        }
+    }
+    else
+    {
+        <span>No image</span> 
+    }
+</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Edit", "Product", new { id = product.Id })">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Product", new { id = product.Id })">Delete</a>
+                    <a class="btn btn-info" href="@Url.Action("Details", "Product", new { id = product.Id })">Details</a>
+
+                </td>                     
+            </tr>
+        }
+    </tbody>
+</table>

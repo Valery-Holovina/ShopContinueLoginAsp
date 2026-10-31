@@ -1,0 +1,70 @@
+@model IEnumerable<ProductImage>
+
+@{
+    ViewData["Title"] = "ProductImage List";
+    Layout = "_Layout";
+}
+    <a class="btn btn-success" href="@Url.Action(action: "Index", "Product")">Main</a>
+
+
+@if(!User.Identity.IsAuthenticated){
+<a class="btn btn-danger" href="@Url.Action(action: "Register", "User")">Register</a>
+<a class="btn btn-primary" href="@Url.Action(action: "Login", "User")">Login</a>
+
+
+}else{
+    <a class="btn btn-success" href="@Url.Action(action: "Insert", "Image")">Add Image</a>
+
+
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Product Images</h2>
+
+    <div class="row g-4">
+        @foreach (var image in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm border-0">
+
+                    <div class="bg-light d-flex align-items-center justify-content-center p-3"
+                         style="height: 220px;">
+                        <img src="@image.ImageUrl"
+                             alt="Product image @image.Id"
+                             class="img-fluid rounded"
+                             style="max-height: 190px; max-width: 100%; object-fit: contain;" />
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Image #@image.Id
+                        </h5>
+
+                        <p class="text-muted mb-2">
+                            Product ID: @image.ProductId
+                        </p>
+
+                        <p class="small text-break mb-0">
+                            <strong>Image URL:</strong><br />
+                            <a href="@image.ImageUrl"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                View image
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="card-footer bg-white border-0 pb-3">
+                        <a href="@image.ImageUrl"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn btn-outline-primary btn-sm w-100">
+                            Open full image
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
